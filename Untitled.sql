@@ -31,10 +31,10 @@ SELECT first_name, last_name, address FROM staff s INNER JOIN address a ON a.add
 SELECT first_name, last_name, SUM(amount) total FROM staff s INNER JOIN payment p ON s.staff_id=p.staff_id
 WHERE payment_date BETWEEN '2005-08-01 00:00:00' AND '2005-08-31 23:59:59' GROUP BY first_name, last_name;
 -- List each film and the number of actors who are listed for that film. Use tables film_actor and film. Use inner join.
-SELECT f.film_id, title, COUNT(*) AS actor_count FROM film f INNER JOIN film_actor fa ON f.film_id=fa.film_id 
+SELECT f.film_id, title, COUNT(*) AS actor_count FROM film f INNER JOIN film_actor fa ON f.film_id=fa.film_id
 GROUP BY film_id, title;
 -- How many copies of the film Hunchback Impossible exist in the inventory system?
-SELECT COUNT(*) FROM inventory i INNER JOIN film f ON i.film_id=f.film_id 
+SELECT COUNT(*) FROM inventory i INNER JOIN film f ON i.film_id=f.film_id
 WHERE f.title='Hunchback Impossible';
 -- Using the tables payment and customer and the JOIN command, list the total paid by each customer. List the customers alphabetically by last name.
 SELECT c.first_name, c.last_name, SUM(p.amount) AS amount FROM payment p INNER JOIN customer c ON p.customer_id=c.customer_id
@@ -62,7 +62,7 @@ INNER JOIN store s ON i.store_id=s.store_id GROUP BY s.store_id;
 -- Write a query to display for each store its store ID, city, and country.
 SELECT s.store_id, ci.city, co.country FROM store s INNER JOIN address a ON s.address_id=a.address_id
 INNER JOIN city ci ON a.city_id=ci.city_id INNER JOIN country co ON ci.country_id=co.country_id;
--- List the top five genres in gross revenue in descending order. (Hint: you may need to use the following tables: category, film_category, inventory, payment, and rental.)
+-- List the top five genres in gross revenue in descending order.
 SELECT f.title, SUM(p.amount) AS 'gross revenue' FROM film f INNER JOIN inventory i ON f.film_id=i.film_id
 INNER JOIN rental r ON r.inventory_id=i.inventory_id INNER JOIN payment p ON p.rental_id=r.rental_id
 GROUP BY f.film_id, f.title ORDER BY SUM(p.amount) DESC LIMIT 5;
